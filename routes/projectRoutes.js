@@ -19,7 +19,6 @@ const router = express.Router();
 //This line sets up a route to create a new project and get all the projects
 //The protect middleware makes sue the user is logged in before accessing the projects
 router.route('/').post(protect, createProject)
-.post(protect, createProject)
 .get(protect, getAllProjects);
 
 //This line sets up routes for getting, updating, and deleting a specific project by ID
