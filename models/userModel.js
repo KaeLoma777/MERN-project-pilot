@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 // Blueprint for a User in the database
 const userSchema = new mongoose.Schema(
     {
-        username: { 
+        name: { 
             type: String, // name must be a string
             required: true, // name is required
         },

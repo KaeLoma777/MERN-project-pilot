@@ -11,7 +11,7 @@ import {
 } from '../controllers/projectController.js';
 
 //This line imports the middleware that protects routes and checks if the user is logged in
-import {protect} from '../middleware/authMiddleware.js';
+import protect from '../middleware/authMiddleware.js';
 
 //This line creates a new router instance that we can attach routes to
 const router = express.Router();

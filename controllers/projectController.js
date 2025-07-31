@@ -1,5 +1,5 @@
 //This line imports the project model and gives us access to the database so we can create find, update, or delete a project
-import Project from "../models/projectModel";
+import Project from "../models/projectModel.js";
 
 //This line creates a function to add a new project when the user asks to create one
 //it's also an async function because it talks to the database, which takes time

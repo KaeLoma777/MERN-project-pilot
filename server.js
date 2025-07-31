@@ -8,6 +8,9 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 //We're grabbing connectDB function from config/db.js file so it can be used here
 import connectDB from './config/db.js';
+// This line imports all the task routes so we can use them in server.js
+import taskRoutes from './routes/taskRoutes.js';
+import projectRoutes from './routes/projectRoutes.js'
 
 // Run the dotenv config so my app can access values from .env
 dotenv.config();
@@ -23,6 +26,11 @@ app.use(express.json());
 // for any route starting with /api/users, use the router we just created. So /api/users/register now points to the registerUser controller.
 app.use('/api/users', userRoutes);
 
+app.use('/api/projects', projectRoutes);
+
+//This line will connect task and related routes to make them accessible as /api/projects/:projectId/tasks
+app.use('/api/projects/:projectId/tasks', taskRoutes)
+
 // Connect to MongoDB using the URI I stored in .env
 // If successful, log a message. If it fails, catch and show the error.
 mongoose.connect(process.env.MONGODB_URI)
@@ -30,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch((err) => console.error('MongoDB connection error:', err));
 
 // Choose which port the server should run on (use env first, or default to 3000)
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Start the server and listen for incoming requests
 // When it starts successfully, log the port number

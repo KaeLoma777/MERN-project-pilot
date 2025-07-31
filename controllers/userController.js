@@ -5,9 +5,12 @@ import bcrypt from 'bcrypt';
 //import jsonwebtoken to create auth tokens
 import jwt from 'jsonwebtoken';
 
+console.log('userController loaded');
+
 // Export an async function named registerUser that takes in request and response objects
 // This function will handle user registration by reading data sent by the client and sending a response
 export const registerUser = async (req, res) => {
+    
     try {
         //The client sends user info in req.body
         //I'm pulling the name, email, and password out of it using destructuring,
@@ -21,7 +24,7 @@ export const registerUser = async (req, res) => {
         //If user exists, stop registration and send back a 400 status with a message
         if (userExists) {
             return res.status(400).json({ message: 'User already exists' });
-        }
+        };
 
         // Use bcrypt to generate a random salt string.
         // This makes each password hash more secure and unique, even if users have the same password.
@@ -54,6 +57,7 @@ export const registerUser = async (req, res) => {
             token,
         });
     } catch (error) {
+        console.error(error);
         //If any error occurs during registration, respond with status 500 and an error message
         res.status(500).json({ message: 'Server error' });
     }
@@ -83,7 +87,7 @@ export const loginUser = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         // If the password doesn't match, we send an error message
-        if (!Match) {
+        if (!isMatch) {
             return res.status(400).json({ message: 'Invalid emal or password' });
         }
 

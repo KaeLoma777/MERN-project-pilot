@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 
 //This line brings in the user model so we can look up the user in the database using the ID from the token
-import User from '../models/userModel';
+import User from '../models/userModel.js';
 
 //This function protects routes by checking if a valid token was sent with the request
 const protect = async (req, res, next) => {
