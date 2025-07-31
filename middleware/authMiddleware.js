@@ -36,10 +36,10 @@ const protect = async (req, res, next) => {
 
         }
 
-        //This line checks if a token was found at all. If not, we return error code 401
-        if (!token) {
-            return res.status(401).json({ message: 'Not authorized, no token' });
-        }
+    }
+    //This line checks if a token was found at all. If not, we return error code 401
+    if (!token) {
+        return res.status(401).json({ message: 'Not authorized, no token' });
     }
 };
 

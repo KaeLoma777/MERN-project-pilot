@@ -9,6 +9,10 @@ export const createTask = async (req, res) => {
         //This is the line that pulls name and description from the request body (the info the user sends)
         const {name, description} = req.body;
 
+        if (!name || !description) {
+            return res.status(400).json({message: 'Name and description are required'});
+        }
+
         //This line will pull the project ID from the url (/projects/:projectId/tasks)
         const projectId = req.params.projectId;
 
@@ -19,6 +23,8 @@ export const createTask = async (req, res) => {
             project: projectId, //link to the project
             user: req.user._id, //link to the user that's logged in
         });
+
+        res.status(201).json(task);
 
         //This line will send back the new task and a confirmation that it worked status 201 OK
     } catch (error) {

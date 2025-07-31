@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
 
         // If the password doesn't match, we send an error message
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid emal or password' });
+            return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         //This line creates a secure token with the user’s ID so the frontend knows they’re logged in. The token expires in one day.
