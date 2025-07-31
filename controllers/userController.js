@@ -5,12 +5,10 @@ import bcrypt from 'bcrypt';
 //import jsonwebtoken to create auth tokens
 import jwt from 'jsonwebtoken';
 
-console.log('userController loaded');
-
 // Export an async function named registerUser that takes in request and response objects
 // This function will handle user registration by reading data sent by the client and sending a response
 export const registerUser = async (req, res) => {
-    
+
     try {
         //The client sends user info in req.body
         //I'm pulling the name, email, and password out of it using destructuring,
@@ -57,7 +55,6 @@ export const registerUser = async (req, res) => {
             token,
         });
     } catch (error) {
-        console.error(error);
         //If any error occurs during registration, respond with status 500 and an error message
         res.status(500).json({ message: 'Server error' });
     }

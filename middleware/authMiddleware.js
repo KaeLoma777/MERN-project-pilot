@@ -14,7 +14,7 @@ const protect = async (req, res, next) => {
 
         // This line splits the Authorization header by space and pulls out the token part (after 'Bearer' is part [0] and the token is part[1])
         //We only want part [1] the actual token
-        const token = req.headers.authorization.split(' ')[1];
+        token = req.headers.authorization.split(' ')[1];
 
 
         try {

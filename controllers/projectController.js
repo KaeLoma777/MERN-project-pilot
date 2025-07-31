@@ -125,13 +125,13 @@ export const deleteProject = async (req, res) => {
 
 
         //This line tries to find and delete the project that matches both the ID and user
-        const deledProject = await Project.findOneAndDelete({
+        const deletedProject = await Project.findOneAndDelete({
             _id: projectId,
             user: req.user._id,
         });
 
-        //If there are no matching project found, we send a 404 error message
-        if (!deledProject) {
+        //If there are no matching projects found, we send an 404 error message
+        if (!deletedProject) {
             return res.status(404).json({message: 'Project not found'});
         }
 

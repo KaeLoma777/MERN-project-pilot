@@ -25,7 +25,6 @@ export const loginUser = async (req, res) => {
 
         //a special code is created with user's ID. The app will use this code to know the user is logged in without asking for password each time.
         //the code is only valid for one day, and user will need to login again
-        console.log('User found, password matched:', user);
         const token = jwt.sign({ id: user._id }, Process.env.JWT_SECRET, {
             expiresIn: '1d',
 
@@ -40,12 +39,12 @@ export const loginUser = async (req, res) => {
 
 
     } catch (error) {
-        console.error('Login error:', error);
+
         //If anything goes wrong during login, send back an error 500 message
         res.status(500).json({ message: 'Server error' });
     }
 
 
-}; 
+};
 
 

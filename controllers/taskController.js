@@ -114,7 +114,7 @@ export const deleteTask = async (req, res) => {
         const {projectId, taskId} = req.params;
 
         //This line will try to find and delete the task that matches task ID, project it belongs to, and who owns the task
-        const deleteTask = await Task.findOneAndDelete({
+        const deletedTask = await Task.findOneAndDelete({
             _id: taskId,
             project: projectId,
             user: req.user._id,
