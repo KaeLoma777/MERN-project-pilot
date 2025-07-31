@@ -12,6 +12,12 @@ export const createProject = async (req, res) => {
         //We destructure to make the code shorter so we don't keep writing req.body.name every time  
         const { name, description } = req.body;
 
+        //This line just ensures the user fills out both fields for name and description
+        //If it's left blank then an error message is sent to fix the issue
+        if (!name || !description) {
+            return res.status(400).json({ message: 'Name and description are required' })
+        }
+
 
         //This line tells the database to make a new project with the info and link it to the current user
         //We pass the name and description the client sent
@@ -92,12 +98,18 @@ export const updateProject = async (req, res) => {
         //This line pulls the new name and description from the user's request body
         const { name, description } = req.body;
 
+        //This line just ensures the user fills out both fields for name and description
+        //If it's left blank then an error message is sent to fix the issue
+        if (!name || !description) {
+            return res.status(400).json({ message: 'Name and description are required' })
+        }
+
         //This line looks for the project by ID and user ID, then updates its name and description
         //The { new: true } option makes sure we get the updated version of the project back instead of the old one
         const updatedProject = await Project.findOneAndUpdate(
             { _id: projectId, user: req.user._id },
-            {name, description},
-            {new: true}
+            { name, description },
+            { new: true }
         );
 
         //If no project is found, it triggers an error 404 with message
@@ -132,16 +144,17 @@ export const deleteProject = async (req, res) => {
 
         //If there are no matching projects found, we send an 404 error message
         if (!deletedProject) {
-            return res.status(404).json({message: 'Project not found'});
+            return res.status(404).json({ message: 'Project not found' });
         }
-
+        //If the project was deleted, we send a successful status 200 OK
+        res.status(200).json({ message: 'Project deleted successfully' });
 
         //If a project is deleted successfully, we send back a successful status 200 OK
 
     } catch (error) {
 
         //If anything goes wrong, this line will send an error 500 message to prevent app/site from crashing
-        res.status(500).json({message: 'Server error'});
+        res.status(500).json({ message: 'Server error' });
     }
 };
 

@@ -1,3 +1,8 @@
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
+import User from "../models/userModel.js";
+
+
 //This the controller function that will handle user login
 //It will be asynchronous because it talks to the database, which takes time
 export const loginUser = async (req, res) => {
@@ -25,7 +30,7 @@ export const loginUser = async (req, res) => {
 
         //a special code is created with user's ID. The app will use this code to know the user is logged in without asking for password each time.
         //the code is only valid for one day, and user will need to login again
-        const token = jwt.sign({ id: user._id }, Process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d',
 
         });
