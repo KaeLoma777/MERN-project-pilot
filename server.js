@@ -11,6 +11,8 @@ import connectDB from './config/db.js';
 // This line imports all the task routes so we can use them in server.js
 import taskRoutes from './routes/taskRoutes.js';
 import projectRoutes from './routes/projectRoutes.js'
+//CORS will allow my backend to talk to my frontend without issues
+import cors from 'cors';
 
 // Run the dotenv config so my app can access values from .env
 dotenv.config();
@@ -22,6 +24,10 @@ connectDB();
 
 // Use middleware to tell Express to automatically parse JSON from requests
 app.use(express.json());
+
+//This line turns on CORS for my backend
+//It's like unlocking the door so my frontend can send requests and get responses from my API
+app.use(cors());
 
 // for any route starting with /api/users, use the router we just created. So /api/users/register now points to the registerUser controller.
 app.use('/api/users', userRoutes);
